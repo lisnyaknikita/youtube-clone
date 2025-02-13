@@ -3,39 +3,43 @@
 import {
 	SidebarGroup,
 	SidebarGroupContent,
+	SidebarGroupLabel,
 	SidebarMenu,
 	SidebarMenuButton,
 	SidebarMenuItem,
 } from '@/components/ui/sidebar'
 import { useAuth, useClerk } from '@clerk/nextjs'
-import { FlameIcon, HomeIcon, PlaySquareIcon } from 'lucide-react'
+import { HistoryIcon, ListVideoIcon, ThumbsUpIcon } from 'lucide-react'
 import Link from 'next/link'
 
 const items = [
 	{
-		title: 'Home',
-		url: '/',
-		icon: HomeIcon,
-	},
-	{
-		title: 'Subscriptions',
-		url: '/feed/subscriptions',
-		icon: PlaySquareIcon,
+		title: 'History',
+		url: '/playlists/history',
+		icon: HistoryIcon,
 		auth: true,
 	},
 	{
-		title: 'Trending',
-		url: '/feed/trending',
-		icon: FlameIcon,
+		title: 'Liked videos',
+		url: '/playlists/liked',
+		icon: ThumbsUpIcon,
+		auth: true,
+	},
+	{
+		title: 'All playlists',
+		url: '/playlists',
+		icon: ListVideoIcon,
+		auth: true,
 	},
 ]
 
-export const MainSection = () => {
+export const PersonalSection = () => {
 	const clerk = useClerk()
 	const { isSignedIn } = useAuth()
-
+	//TODO: create a new branch for db setup
 	return (
 		<SidebarGroup>
+			<SidebarGroupLabel>You</SidebarGroupLabel>
 			<SidebarGroupContent>
 				<SidebarMenu>
 					{items.map(item => (
